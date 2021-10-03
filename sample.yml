@@ -1,4 +1,4 @@
-- name: playbook
+- name: Playbook
   hosts: all
   tasks:
     - name: Print Hello world
