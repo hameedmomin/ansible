@@ -1,3 +1,10 @@
-- name: Print Component Name
-  debug:
-    msg: Component = Frontend
+- name: Install the Nginx
+  yum:
+    name: nginx
+    state: present
+
+#- name: Download package
+# include_role:
+#   name: common
+#   tasks_from: download
+#  vars:
