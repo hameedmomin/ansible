@@ -18,3 +18,10 @@ shipping.connection.internal
 rabbitmq.connection.internal
 [PAYMENT]
 payment.connection.internal
+
+# to make name from small letters to capital letters then v'll use
+#(for i in frontend cart mongodb redis user cart shipping rabbitmq payment ; do echo "[$(echo$i)]" ; done | tr [a-z] [A-Z]
+
+#(for i in frontend cart mongodb redis user cart shipping rabbitmq payment ; do echo "[$(echo$i | | tr [a-z] [A-Z])]" ; done
+
+#(for i in frontend cart mongodb redis user cart shipping rabbitmq payment ; do echo "[$(echo$i | | tr [a-z] [A-Z])]\n$i.connection.internal" ; done
