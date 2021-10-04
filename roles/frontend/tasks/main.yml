@@ -3,6 +3,28 @@
     name: nginx
     state: present
 
+- name: Remove old htdocs directory
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: absent
+
+- name: Extract Packages
+  ansible.builtin.unarchive:
+    src: http://github.com/roboshop-devops-project/frontend/archive/main.zip
+    dest: /usr/share/nginx
+    remote_src: yes
+
+- name: Copy Extracted Directory
+  ansible.builtin.copy:
+    src: /usr/share/nginx/frontend-main/static/
+    dest: /usr/share/nginx/html/
+    remote_src: yes
+
+- name: Copy Nginx Roboshop config
+  copy:
+    src: roboshop.conf
+    dest: /etc/nginx/default.d/roboshop.conf
+
 - name: Start Nginx
   ansible.builtin.systemd:
     name: nginx
@@ -12,8 +34,4 @@
 
 
 
-#- name: Download package
-# include_role:
-#   name: common
-#   tasks_from: download
-#  vars:
+
