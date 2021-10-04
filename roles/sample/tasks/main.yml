@@ -8,8 +8,8 @@
   debug:
     msg: URL = {{ URL }}
 
-#- name: Load Sample
-#  include_tasks: sample.yml
+- name: Load Sample
+  include_tasks: sample.yml
 #
 #
 
