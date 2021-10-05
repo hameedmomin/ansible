@@ -2,7 +2,7 @@
   hosts: localhost
   tags:
    - Animal
-   tasks:
+  tasks:
     - name: Display Animal names
       debug:
         msg: "Elephant"
@@ -11,7 +11,7 @@
   hosts:
   tags:
    - Fruits
-    tasks:
+  tasks:
      - name: Display Fruit name
        debug:
          msg: "Mango is the King of Fruits"
