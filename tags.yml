@@ -8,7 +8,7 @@
         msg: "Elephant"
 
 - name: Demo on tags 1
-  hosts:
+  hosts: localhost
   tags:
    - Fruits
   tasks:
