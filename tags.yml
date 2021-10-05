@@ -1,11 +1,11 @@
 - name: Demo on tags
- hosts: localhost
- tags:
-  - Animal
-  tasks:
-   - name: Display Animal names
-     debug:
-       msg: "Elephant"
+  hosts: localhost
+  tags:
+   - Animal
+   tasks:
+    - name: Display Animal names
+      debug:
+        msg: "Elephant"
 
 - name: Demo on tags 1
   hosts:
