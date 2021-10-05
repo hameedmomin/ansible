@@ -1,4 +1,4 @@
--name: Demo on tags
+- name: Demo on tags
  hosts: localhost
  tags:
   - Animal
