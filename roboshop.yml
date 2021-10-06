@@ -61,7 +61,7 @@
      role: cart
 
 - name: Setup Roboshop Project -- Redis Component
-  hosts: MySQL
+  hosts: MYSQL
   become: yes
   tags:
    - mysql
