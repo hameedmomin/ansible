@@ -1,3 +1,58 @@
-- name: Print Component Name
-  debug:
-    msg: Component = MySql
+- name: Add MySQL repository
+  yum_repository:
+    name: MySQL
+    description: MySQL Repository
+    baseurl: http://repo.mysql.com/yum/mysql-5.7-community/el/7/$basearch/
+    enabled: yes
+    gpgcheck: no
+    file: mysql
+
+- name: remove MariaDB libaries
+  yum:
+    name: mariadb-labs
+    state: absent
+
+- name: Install MySQL Service
+  systemd:
+    name: mysqld
+    state: started
+    enabled: yes
+
+- name: Check the MYSQL LOGIN
+  community.mysql.mysql_query:
+     login_user: root
+     login_password: Roboshop@1
+     query: show databases
+  register: out
+  ignore_errors: yes
+
+- name: Reset MySql Password
+  block:
+    - name: Grabbing Dedfault password
+      shell: grep "A temporary password" /var/log/mysqld.log | awk '{print $NF}
+      register: MYSQL_DEFAULT_PASSWORD
+
+    - name: Copy password Reset SQL Script
+      copy:
+        src: mysql-pass-reset.sql
+        dest: /tmp/mysql-pass-reset.sql
+
+    - name: Set Mysql Root password
+      shell: mysql --connect-expired-password -u root -p"{{MYSQL_DEFAULT_PASSWORD}} < /tmp/mysql-pass-reset.sql
+  when: out.failed
+
+- name: Download Package
+  include_role:
+    name: common
+    tasks_from: download-from-github
+  vars:
+    APP_DIR: /tmp/mysql-main
+    EXTRACT_DIR: /tmp
+
+- name: Load Schema
+  community.mysql.mysql_db:
+    state: import
+    name: all
+    target: /tmp/mysql-main/shipping.sql
+    login_user: root
+    login_password: Roboshop@1
