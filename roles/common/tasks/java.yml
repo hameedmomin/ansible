@@ -22,6 +22,7 @@
     src: /tmp/{{COMPONENT}}-main/
     dest: /home/roboshop/{{COMPONENT}}/
     remote_src: yes
+  become_user: roboshop
 
 - name: Build a package with Maven
   shell: mvn clean package && mv target/{{COMPONENT}}-1.0.jar {{COMPONENT}}.jar
