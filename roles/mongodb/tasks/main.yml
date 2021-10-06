@@ -31,7 +31,7 @@
 
 - name: Download Package
   include_role:
-    name: commmon
+    name: common
     tasks_from: download-from-github.yml
   vars:
     APP_DIR: /tmp/mongodb-main
