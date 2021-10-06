@@ -6,7 +6,7 @@
         path: ~/.ssh/known_hosts
         state: absent
 
-- name: Setup Roboshop Project
+- name: Setup Roboshop Project -- Frontend Component
   hosts: FRONTEND
   become: yes
   tags:
@@ -15,7 +15,7 @@
    - name: Load Frontend Role
      role: frontend
 
-- name: Setup Roboshop Project
+- name: Setup Roboshop Project -- MongoDB Component
   hosts: MONGODB
   become: yes
   tags:

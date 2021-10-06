@@ -1,5 +1,5 @@
-#- name: Set-Up Host Name
-# shell: sudo set-hostname {{COMPONENT}}
+- name: Set-Up Host Name
+  shell: set-hostname {{COMPONENT}}
 
 - name: Disable Auto Shutdown
   shell: disable-auto-shutdown
