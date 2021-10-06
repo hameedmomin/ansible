@@ -28,8 +28,8 @@
 
 - name: Reset MySql Password
   block:
-    - name: Grabbing Dedfault password
-      shell: grep "A temporary password" /var/log/mysqld.log | awk '{print $NF}
+    - name: Grabbing Default password
+      shell: grep "A temporary password" /var/log/mysqld.log | awk '{print $NF}'
       register: MYSQL_DEFAULT_PASSWORD
 
     - name: Copy password Reset SQL Script
