@@ -37,12 +37,6 @@
     APP_DIR: /tmp/mongodb-main
     EXTRACT_DIR: /tmp
 
-- name: Load Schema
-  community.mongodb_shell:
-    file: "/tmp/mongodb-main/{{item}}"
-    idempotent: yes
-  loop:
-    - users.js
-    - catalogue.js
+
 
 
