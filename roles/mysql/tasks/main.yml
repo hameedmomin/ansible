@@ -7,12 +7,12 @@
     gpgcheck: no
     file: mysql
 
-- name: remove MariaDB libaries
+- name: Remove MariaDB Libraries
   yum:
-    name: mariadb-labs
+    name: mariadb-libs
     state: absent
 
-- name: Install MySQL Service
+- name: Install MySQL Server
   yum:
     name:
       - mysql-community-server
@@ -25,27 +25,27 @@
     state: started
     enabled: yes
 
-- name: Check the MYSQL LOGIN
+- name: Check the MySQL Login
   community.mysql.mysql_query:
-     login_user: root
-     login_password: Roboshop@1
-     query: show databases
+    login_user: root
+    login_password: RoboShop@1
+    query: show databases
   register: out
   ignore_errors: yes
 
-- name: Reset MySql Password
+- name: Reset MySQL Password
   block:
-    - name: Grabbing Default password
+    - name: Grabbing Default Password
       shell: grep "A temporary password" /var/log/mysqld.log | awk '{print $NF}'
       register: MYSQL_DEFAULT_PASSWORD
 
-    - name: Copy password Reset SQL Script
+    - name: Copy Password Reset SQL Script
       copy:
         src: mysql-pass-reset.sql
         dest: /tmp/mysql-pass-reset.sql
 
-    - name: Set Mysql Root password
-      shell: mysql --connect-expired-password -u root -p"{{MYSQL_DEFAULT_PASSWORD}}" < /tmp/mysql-pass-reset.sql
+    - name: Set MySQL root Password
+      shell: mysql --connect-expired-password -u root -p"{{MYSQL_DEFAULT_PASSWORD.stdout}}" < /tmp/mysql-pass-reset.sql
   when: out.failed
 
 - name: Download Package
