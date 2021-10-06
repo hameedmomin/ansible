@@ -13,10 +13,11 @@
     state: absent
 
 - name: Install MySQL Service
-  systemd:
-    name: mysql
-    state: started
-    enabled: yes
+  yum:
+    name:
+      - mysql-community-server
+      - MySQL-python
+    state: present
 
 - name: Check the MYSQL LOGIN
   community.mysql.mysql_query:
