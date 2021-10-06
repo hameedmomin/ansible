@@ -21,5 +21,14 @@
   tags:
    - mongodb
   roles:
-   - name: Load Frontend Role
+   - name: Load MongoDB Role
      role: mongodb
+
+- name: Setup Roboshop Project -- Catalogue Component
+  hosts: CATALOGUE
+  become: yes
+  tags:
+   - catalogue
+  roles:
+   - name: Load Catalogue Role
+     role: catalogue
