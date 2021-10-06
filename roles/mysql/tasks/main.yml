@@ -19,6 +19,12 @@
       - MySQL-python
     state: present
 
+- name: Start MySQL Service
+  systemd:
+    name: mysqld
+    state: started
+    enabled: yes
+
 - name: Check the MYSQL LOGIN
   community.mysql.mysql_query:
      login_user: root
