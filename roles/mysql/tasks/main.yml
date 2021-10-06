@@ -38,7 +38,7 @@
         dest: /tmp/mysql-pass-reset.sql
 
     - name: Set Mysql Root password
-      shell: mysql --connect-expired-password -u root -p"{{MYSQL_DEFAULT_PASSWORD}} < /tmp/mysql-pass-reset.sql
+      shell: mysql --connect-expired-password -u root -p"{{MYSQL_DEFAULT_PASSWORD}}" < /tmp/mysql-pass-reset.sql
   when: out.failed
 
 - name: Download Package
