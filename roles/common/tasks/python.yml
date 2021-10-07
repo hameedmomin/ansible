@@ -28,7 +28,7 @@
 
 - name: Install Python Dependencies
   pip:
-    requirments: /home/roboshop/{{COMPONENT}}/requirements.txt
+    requirements: /home/roboshop/{{COMPONENT}}/requirements.txt
     executable: pip3
 
 - name: Copy SystemD files
