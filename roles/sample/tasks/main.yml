@@ -10,10 +10,9 @@
 
 - name: Load Sample
   include_tasks: sample.yml
-#
-#
 
-#- name: Template
-#  template:
-#    src: sample.txt
-#    dest: /tmp/sample.txt
+
+- name: Template
+  template:
+    src: sample.txt
+    dest: /tmp/sample.txt
