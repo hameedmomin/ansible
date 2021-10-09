@@ -1,15 +1,15 @@
-- name: Print Hello
-  debug:
-    msg: Hello from a Role
+#- name: Print Hello
+#  debug:
+#    msg: Hello from a Role
 
 # why we are making file and directories caz its we arre grouping them into one, and its ansible playbook structure i will tell us where and it will search in each of them
 
-- name: Print URL
-  debug:
-    msg: URL = {{ URL }}
+#- name: Print URL
+#  debug:
+#    msg: URL = {{ URL }}
 
-- name: Load Sample
-  include_tasks: sample.yml
+#- name: Load Sample
+#  include_tasks: sample.yml
 
 
 - name: Template
