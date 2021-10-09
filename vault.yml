@@ -1,4 +1,3 @@
-# when we are hardcoring some paasword so we use Vaults but mistly we will use aws provided vaults than ansible vault
 - name: Keeping password in encrypted
   hosts: localhost
   vars:
@@ -7,3 +6,5 @@
     - name: Demo on vaults
       debug:
         msg: Password = {{PASSWORD}}
+
+# when we are hardcoring some paasword so we use Vaults but mistly we will use aws provided vaults than ansible vault
