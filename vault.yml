@@ -1,0 +1,1 @@
+# when we are hardcoring some paasword so we use Vaults but mistly we will use aws provided vaults than ansible vault
