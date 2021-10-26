@@ -4,7 +4,7 @@
     - name: Clear Known Hosts file
       file:
         path: /home/centos/.ssh/known_hosts
-        state: absent
+        state: present
 
 - name: Setup Roboshop Project -- Frontend Component
   hosts: FRONTEND
