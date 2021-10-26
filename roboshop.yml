@@ -3,7 +3,7 @@
   tasks:
     - name: Clear Known Hosts file
       file:
-        path: ~/.ssh/known_hosts
+        path: /home/centos/.ssh/known_hosts
         state: absent
 
 - name: Setup Roboshop Project -- Frontend Component
