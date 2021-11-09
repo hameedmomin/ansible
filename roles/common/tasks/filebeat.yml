@@ -1,5 +1,5 @@
 - name: Import keys
-  ansible.builtin.rpm_keys:
+  ansible.builtin.rpm_key:
     state: latest
     key: https://packages.elastic.co/GPG-KEY-elasticsearch
 
