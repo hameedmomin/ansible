@@ -12,7 +12,7 @@
     gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     enabled: true
 
-- name: Install filebeat
+- name: Install Filebeat
   yum:
      name: filebeat
      state: latest
