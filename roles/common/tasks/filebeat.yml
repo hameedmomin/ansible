@@ -1,6 +1,6 @@
 - name: Import keys
   ansible.builtin.rpm_key:
-    state: latest
+    state: present
     key: https://packages.elastic.co/GPG-KEY-elasticsearch
 
 - name: Setup Repos
