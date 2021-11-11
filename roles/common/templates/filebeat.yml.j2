@@ -6,7 +6,6 @@ filebeat.inputs:
 {% endif %}
     paths:
       - {{FILENAME}}
-##ilm is nothing but INDEX LIFE MANAGEMENT which tells us how the index should filebeat so we have to disable it manually and this session we changing the name of log
 
 {% if IS_STRUCTURED %}
 setup.ilm.enabled: false
