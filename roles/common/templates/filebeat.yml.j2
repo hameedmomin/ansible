@@ -14,6 +14,7 @@ setup.template.name: "{{COMPONENT}}"
 setup.template.pattern: "{{COMPONENT}}-*"
 output.elasticsearch:
   hosts: ["172.31.76.197:9200"]
+  index: "{{COMPONENT}-%{+yyyy.MM.dd}"
 {% endif %}
 
 {% if not IS_STRUCTURED %}
