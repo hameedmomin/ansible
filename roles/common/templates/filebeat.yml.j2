@@ -6,8 +6,12 @@ filebeat.inputs:
 {% endif %}
     paths:
       - {{FILENAME}}
+##ilm is nothing but INDEX LIFE MANAGEMENT which tells us how the index should filebeat so we have to disable it manually and this session we changing the name of log
 
 {% if IS_STRUCTURED %}
+setup.ilm.enabled: false
+setup.template.name: "{{COMPONENT}}"
+setup.template.pattern: "{{COMPONENT}}-*"
 output.elasticsearch:
   hosts: ["172.31.76.197:9200"]
 {% endif %}
