@@ -47,4 +47,7 @@
   include_role:
     name: common
     tasks_from: filebeat
+  vars:
+   IS_STRUCTURED: "true"
+
 

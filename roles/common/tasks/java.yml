@@ -41,3 +41,11 @@
     state: started
     enabled: yes
     daemon_reload: yes
+
+
+- name: Setup filebeat
+  include_role:
+    name: common
+    tasks_from: filebeat
+  vars:
+   IS_STRUCTURED: "false"
