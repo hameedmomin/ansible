@@ -6,6 +6,9 @@ filebeat.inputs:
 {% endif %}
     paths:
       - {{FILENAME}}
+##fields is the extra info for log to give us log (it is called as meta info)
+    fields:
+    component: {{COMPONENT}}
 
 {% if IS_STRUCTURED %}
 setup.ilm.enabled: false
