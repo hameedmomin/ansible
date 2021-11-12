@@ -41,8 +41,8 @@
     name: common
     tasks_from: filebeat
   vars:
-    IS_STRUCTURED: false
-     FILENAME: /var/log/nginx/access.log
-     APPTYPE: NGINX
+   IS_STRUCTURED: false
+   FILENAME: /var/log/nginx/access.log
+   APPTYPE: NGINX
 
 
