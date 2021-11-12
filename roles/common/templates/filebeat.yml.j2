@@ -20,13 +20,9 @@ output.elasticsearch:
 {% endif %}
 
 {% if not IS_STRUCTURED %}
-setup.ilm.enabled: false
-setup.template.name: "{{COMPONENT}}"
-setup.template.pattern: "{{COMPONENT}}-*"
 output.logstash:
  hosts: ["172.31.21.226:5044"]
- index: "{{COMPONENT}}"
-{% endif %}
+ {% endif %}
 
 filebeat.config.modules:
   path: ${path.config}/modules.d/*.yml
