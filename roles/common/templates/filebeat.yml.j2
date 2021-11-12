@@ -22,6 +22,7 @@ output.elasticsearch:
 {% if not IS_STRUCTURED %}
 output.logstash:
  hosts: ["172.31.76.197:5044"]
+ index: "{{COMPONENT}}-%{+yyyy.MM.dd}"
 {% endif %}
 
 filebeat.config.modules:
