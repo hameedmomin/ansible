@@ -17,6 +17,9 @@ filebeat.inputs:
 
  ##multiline which we are using this is caz of shipping is a java services thus because of log comes in exceptions cases so we are using it
 
+{% if APPTYPE == "PYTHON" %}
+    include_lines: ['^\[']
+{% endif %}
 
 {% if IS_STRUCTURED %}
 setup.ilm.enabled: false
