@@ -35,7 +35,6 @@
     state: started
     enabled: yes
 
-
 - name: Setup filebeat
   include_role:
     name: common
