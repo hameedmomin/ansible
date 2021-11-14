@@ -29,11 +29,12 @@
     src: nginx.conf
     dest: /etc/nginx/nginx.conf
 
-- name: Start Nginx
+- name: Start Nignx
   ansible.builtin.systemd:
+    state: restarted
     name: nginx
-    state: started
     enabled: yes
+  ignore_errors: true
 
 - name: Setup filebeat
   include_role:
@@ -43,5 +44,4 @@
    IS_STRUCTURED: false
    FILENAME: /var/log/nginx/access.log
    APPTYPE: NGINX
-
 
