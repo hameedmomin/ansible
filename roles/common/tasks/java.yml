@@ -30,10 +30,18 @@
     chdir: /home/roboshop/{{COMPONENT}}
   become_user: roboshop
 
-- name: copy systemD file
+- name: Update systemD file
   copy:
     src: systemd.service
     dest: /etc/systemd/system/{{COMPONENT}}.service
+  when: ENV is not defined
+
+- name: copy systemD file
+  template:
+    src: systemd.service
+    dest: /etc/systemd/system/{{COMPONENT}}.service
+  when: ENV is defined
+
 
 - name: Start {{COMPONENT}} service
   systemd:
