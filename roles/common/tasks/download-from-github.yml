@@ -1,10 +1,40 @@
-- name: Remove old content
-  ansible.builtin.file:
-    path: "{{APP_DIR}}"
-    state: absent
-
-- name: Extract Packages
+- name: Extract Package
   ansible.builtin.unarchive:
-    src: http://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
+    src: https://github.com/roboshop-devops-project/{{COMPONENT}}/archive/main.zip
     dest: "{{EXTRACT_DIR}}"
     remote_src: yes
+
+- name: Copy content to actual directory
+  copy:
+    src: /tmp/{{COMPONENT}}-main/
+    dest: /home/roboshop/{{COMPONENT}}/
+    remote_src: yes
+  become_user: roboshop
+  when: COMPONENT != "frontend"
+
+- name: Copy content to actual directory
+  copy:
+    src: /tmp/{{COMPONENT}}-main/
+    dest: /usr/share/nginx/html
+    remote_src: yes
+  when: COMPONENT == "frontend"
+
+- name: Download NodeJS Dependencies
+  community.general.npm:
+    path: /home/roboshop/{{COMPONENT}}
+  become_user: roboshop
+  when: APP_TYPE == "nodejs"
+
+- name: Build a Package with Maven
+  shell: mvn clean package && mv target/{{COMPONENT}}-1.0.jar {{COMPONENT}}.jar
+  args:
+    chdir: /home/roboshop/{{COMPONENT}}
+  become_user: roboshop
+  when: APP_TYPE == "java"
+
+- name: Copy Extracted Directory
+  ansible.builtin.copy:
+    src: /tmp/frontend-main/static/
+    dest: /usr/share/nginx/html/
+    remote_src: yes
+  when: COMPONENT == "frontend"

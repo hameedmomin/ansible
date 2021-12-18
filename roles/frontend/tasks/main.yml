@@ -6,18 +6,11 @@
 - name: Download Package
   include_role:
     name: common
-    tasks_from: download-from-github.yml
+    tasks_from: download
   vars:
     APP_DIR: /usr/share/nginx/html
     EXTRACT_DIR: /usr/share/nginx
     APP_TYPE: web
-
-
-- name: Copy Extracted Directory
-  ansible.builtin.copy:
-    src: /usr/share/nginx/frontend-main/static/
-    dest: /usr/share/nginx/html/
-    remote_src: yes
 
 - name: Copy Nginx Roboshop config
   copy:

@@ -12,23 +12,11 @@
 - name: Download Package
   include_role:
     name: common
-    tasks_from: download-from-github
+    tasks_from: download
   vars:
     APP_DIR: "/home/roboshop/{{COMPONENT}}"
-    EXTRACT_DIR: /tmp
+    APP_TYPE: java
 
-- name: Copy content to actual directory
-  copy:
-    src: /tmp/{{COMPONENT}}-main/
-    dest: /home/roboshop/{{COMPONENT}}/
-    remote_src: yes
-  become_user: roboshop
-
-- name: Build a package with Maven
-  shell: mvn clean package && mv target/{{COMPONENT}}-1.0.jar {{COMPONENT}}.jar
-  args:
-    chdir: /home/roboshop/{{COMPONENT}}
-  become_user: roboshop
 
 - name: Update systemD file
   copy:

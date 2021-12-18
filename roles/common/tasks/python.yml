@@ -10,26 +10,32 @@
   ansible.builtin.user:
     name: roboshop
     comment: Roboshop Project User
+    register: robouser_meta
 
 - name: Download Packages
   include_role:
     name: common
-    tasks_from: download-from-github
+    tasks_from: download
   vars:
     APP_DIR: /home/roboshop/{{COMPONENT}}
-    EXTRACT_DIR: /tmp
-
-- name: Copying file
-  copy:
-    src: /tmp/{{COMPONENT}}-main/
-    dest: /home/roboshop/{{COMPONENT}}
-    remote_src: yes
-  become_user: roboshop
+    APP_TYPE: python
 
 - name: Install Python Dependencies
   pip:
     requirements: /home/roboshop/{{COMPONENT}}/requirements.txt
     executable: pip3
+
+- name: Update Payment Config file - USER
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/payment.ini
+    regexp: '^uid'
+    line: "uid = {{robouser_meta.uid}}"
+
+- name: Update Payment Config file - GROUP
+  ansible.builtin.lineinfile:
+    path: /home/roboshop/{{COMPONENT}}/payment.ini
+    regexp: '^gid'
+    line: "gid = {{robouser_meta.group}}"
 
 - name: Copy SystemD files
   copy:

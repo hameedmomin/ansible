@@ -17,7 +17,7 @@
     tasks_from: download
   vars:
     APP_DIR: /home/roboshop/{{COMPONENT}}
-    EXTRACT_DIR: /tmp
+    APP_TYPE: nodejs
 
 - name: Copy SystemD files
   copy:
