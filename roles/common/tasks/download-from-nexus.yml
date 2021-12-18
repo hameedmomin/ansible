@@ -1,0 +1,36 @@
+- name: Download Package
+  get_url:
+    url: http://172.31.82.132:8081/repository/{{COMPONENT}}/{{COMPONENT}}-{{APP_VERSION}}.zip
+    dest: /tmp/{{COMPONENT}}.zip
+    url_username: admin
+    url_password: hameed
+
+#- name: Create Application Directory
+#  file:
+#    path: "{{APP_DIR}}"
+#    state: directory
+#    owner: roboshop
+#    group: roboshop
+#  when: COMPONENT != "frontend"
+#
+#- name: Extract Package
+#  unarchive:
+#    src: /tmp/{{COMPONENT}}.zip
+#    dest: "{{APP_DIR}}"
+#    remote_src: true
+#    owner: roboshop
+#    group: roboshop
+#  when: COMPONENT != "frontend"
+#
+#- name: Create Application Directory
+#  file:
+#    path: "{{APP_DIR}}"
+#    state: directory
+#  when: COMPONENT == "frontend"
+#
+#- name: Extract Package
+#  unarchive:
+#    src: /tmp/{{COMPONENT}}.zip
+#    dest: "{{APP_DIR}}"
+#    remote_src: true
+#  when: COMPONENT == "frontend"

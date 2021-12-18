@@ -1,0 +1,24 @@
+- name: Remove old content
+  ansible.builtin.file:
+    path: "{{APP_DIR}}"
+    state: absent
+
+- name: Download Packages from GitHUb
+  include_role:
+    name: common
+    tasks_from: download-from-github
+  vars:
+    EXTRACT_DIR: /tmp
+  when: APP_VERSION is not defined
+
+- name: Download Package from Nexus
+  include_role:
+    name: common
+    tasks_from: download-from-nexu
+  when: APP_VERSION is defined
+
+#- name: Download Package from Azure Artifacts
+#  include_role:
+#    name: common
+#    tasks_from: download-from-azure
+#  when: APP_VERSION is defined
