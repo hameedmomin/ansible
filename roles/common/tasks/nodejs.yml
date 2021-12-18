@@ -19,18 +19,6 @@
     APP_DIR: /home/roboshop/{{COMPONENT}}
     EXTRACT_DIR: /tmp
 
-- name: Copying file
-  copy:
-    src: /tmp/{{COMPONENT}}-main/
-    dest: /home/roboshop/{{COMPONENT}}
-    remote_src: yes
-  become_user: roboshop
-
-- name: Download Dependencies
-  community.general.npm:
-    path: /home/roboshop/{{COMPONENT}}
-  become_user: roboshop
-
 - name: Copy SystemD files
   copy:
     src: systemd.service
