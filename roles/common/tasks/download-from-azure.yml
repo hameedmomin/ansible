@@ -1,0 +1,46 @@
+- name: Check AZ Cli
+  stat:
+    path: /bin/az
+  register: azcheck
+
+- name: Setup Azure Cli
+  when: azcheck.stat.exists is false
+  block:
+    - name: Setup AZ rpm key
+      ansible.builtin.rpm_key:
+        state: present
+        key: https://packages.microsoft.com/keys/microsoft.asc
+
+    - name: Copy Az repo
+      copy:
+        src: az.repo
+        dest: /etc/yum.repos.d/az.repo
+
+    - name: Install Az Cli
+      yum:
+        name: ["azure-cli", "libicu"]
+        state: present
+
+    - name: Install Az Extention
+      shell: az extension add --name azure-devops
+
+
+- name: Login to Azure Devops
+  shell: echo {{PAT}} | az devops login
+
+- name: Create Application Directory
+  file:
+    path: "{{APP_DIR}}"
+    state: directory
+    owner: roboshop
+    group: roboshop
+  when: COMPONENT != "frontend"
+
+- name: Create Application Directory
+  file:
+    path: "{{APP_DIR}}"
+    state: directory
+  when: COMPONENT == "frontend"
+
+- name: Download Artifacts
+  shell:  az artifacts universal publish --organization https://dev.azure.com/hameedmomin --project="my-new-projects" --scope project --feed roboshop --name frontend --version $(Build.SourceBranchName) --description "frontend" --path .
