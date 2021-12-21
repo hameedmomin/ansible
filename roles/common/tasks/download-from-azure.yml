@@ -43,4 +43,4 @@
   when: COMPONENT == "frontend"
 
 - name: Download Artifacts
-  shell:  az artifacts universal publish --organization https://dev.azure.com/hameedmomin --project="my-new-projects" --scope project --feed roboshop --name frontend --version $(Build.SourceBranchName) --description "frontend" --path .
+  shell: az artifacts universal download --organization "https://dev.azure.com/hameedmomin" --project "1f5ae8f9-ba51-4897-aa74-83afa0b4c78f"  --scope project --feed "roboshop" --name {{COMPONENT}} --version {{APP_VERSION}} --path {{APP_DIR}}/.
